@@ -13,7 +13,7 @@ const Index = () => {
 
   useEffect(() => {
     if (!ws) {
-      setWs(new WebSocket('ws://server.estim8.poker/'));
+      setWs(new WebSocket('wss://server.estim8.poker/'));
     }
   }, []);
 
