@@ -119,7 +119,7 @@ const Index = () => {
           </div>
         </div>
       </nav>
-      <div className="container mx-auto">
+      <div className="container below-fold-container mx-auto">
         <div className="flex space-x-4 my-10">
           <div className="w-3/4 bg-white rounded-xl px-4 py-4">
             {mainPanel}

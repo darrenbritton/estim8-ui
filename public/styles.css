@@ -1,0 +1,140 @@
+.poker-card {
+  width: 100px;
+  height: 138px;
+  background-color: #fff;
+  border: 3.5px solid #e1e1e1;
+  border-radius: 15px;
+  display: inline-block;
+  margin: 0 10px 10px 0;
+  position: relative;
+  cursor: pointer;
+  background: #fff;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.poker-card:hover {
+  border-color: #62a4dc;
+  color: #0472d0;
+}
+
+.poker-card:focus {
+  border-color: #70c793;
+  color: #69b77a;
+  outline: none;
+}
+
+.poker-card-inner {
+  position: absolute;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  width: 75%;
+  height: 80%;
+  font-size: 45px;
+  font-weight: 500;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.poker-card:hover .poker-card-inner {
+  background-color: #e0eef9;
+}
+
+.poker-card:focus .poker-card-inner {
+  background-color: #e0f9e3;
+}
+
+.poker-card-number-accent {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  background-color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  color: #9e9e9e;
+}
+
+.poker-card:hover .poker-card-number-accent {
+  color: #68a1d4;
+}
+
+.poker-card:focus .poker-card-number-accent {
+  color: #68d491;
+}
+
+.poker-card-number-accent.left {
+  top: -10%;
+  left: -10%;
+}
+
+.poker-card-number-accent.right {
+  bottom: -10%;
+  right: -10%;
+}
+
+.below-fold-container {
+  min-height: calc(100vh - 155px);
+}
+
+.stats {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 0 0 20px 0;
+}
+
+.stats-container {
+  background-color: #efefef;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.stats-title {
+  font-size: 18px;
+  font-weight: 400;
+  color: #9e9e9e;
+}
+
+.stats-result {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.results {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.results-container {
+  display: inline-block;
+  min-width: 40%;
+  font-size: 20px;
+  font-weight: 300;
+  color: #323232;
+}
+
+@media only screen and (max-width: 1286px) {
+  .results-container {
+    width: 90%;
+  }
+  .results {
+    margin-bottom: 10px;
+  }
+}

@@ -1,13 +1,21 @@
-import { PieChart } from 'react-minimal-pie-chart';
+import { PieChart } from "react-minimal-pie-chart";
+import Color from "color";
 
 const Results = ({ game, roundReset }) => {
   if (!game) {
-    return (<div>loading</div>);
+    return <div>loading</div>;
   }
 
-  const colors = ['#ffc907', '#ec018c', '#2488c9', '#e03d26', '#2488c9', '#20abdb', '#2d3485'];
+  const colors = ["533a71","6184d8","50c5b7","f9b3d1","065143","ffbf00","ff4242", '33658A'];
+  // game.players = [{ name: "a", points: 0 }, { name: "b", points: 0.5 }, { name: "c", points: 1 }, { name: "d", points: 3 }, { name: "e", points: 5 }, { name: "f", points: 13 }, { name: "g", points: 20 }, { name: "h", points: 40 }];
+  const textColors = [];
+  const scores = game.players.map((p) => p.points);
+  const totalVotes = game.players.length;
+  const average = (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(2);
+  const lowest = Math.min(...scores);
+  const highest = Math.max(...scores);
   const results = game.players
-    .filter((player) => player.points)
+    .filter((player) => player.points !== null)
     .reduce((acc, player) => {
       let item = acc.find((i) => i.points === player.points);
       if (!item) {
@@ -17,44 +25,57 @@ const Results = ({ game, roundReset }) => {
       item.players.push(player.name);
       return acc;
     }, []);
-  const donutData = results.sort((a, b) => (a.points > b.points ? 1 : -1))
-    .map((res) => ({
-      title: res.points,
-      value: res.players.length,
-      color: colors.shift(),
-    }));
-
+  const donutData = results
+    .sort((a, b) => (a.points > b.points ? 1 : -1))
+    .map((res) => {
+      const color = `#${colors.shift()}`;
+      textColors.push({ value: res.points, color, fadedColor: Color(color).fade(0.9).hsl() });
+      return {
+        title: res.points,
+        value: res.players.length,
+        color,
+      };
+    });
   return (
     <div>
       <div className="flex space-x-4">
         <div className="w-1/3 align-middle">
-          <table className="table-auto w-full divide-y divide-gray-200">
-            <thead>
-              <tr>
-                <th scope="col" className="px-4 py-2 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase">
-                  Pts
-                </th>
-                <th scope="col" className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">
-                  Players
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {
-                results.sort((a, b) => (a.points > b.points ? 1 : -1))
-                  .map((result) => (
-                    <tr key={`result:${results.points}`}>
-                      <td className="px-4 py-2 text-center whitespace-nowrap">
-                        {result.points}
-                      </td>
-                      <td className="px-4 py-2">
-                        {result.players.sort().map((p) => p).join(', ')}
-                      </td>
-                    </tr>
-                  ))
-              }
-            </tbody>
-          </table>
+          <div className="flex stats">
+            <div className="stats-container">
+              <div className="stats-result">{totalVotes}</div>
+              <div className="stats-title">Total</div>
+            </div>
+            <div className="stats-container">
+              <div className="stats-result">{average}</div>
+              <div className="stats-title">Average</div>
+            </div>
+            <div className="stats-container">
+              <div className="stats-result">{lowest}</div>
+              <div className="stats-title">Lowest</div>
+            </div>
+            <div className="stats-container">
+              <div className="stats-result">{highest}</div>
+              <div className="stats-title">Highest</div>
+            </div>
+          </div>
+          <div className="flex results">
+            {game.players
+              .sort((a, b) => (a.points > b.points ? -1 : 1))
+              .map((player) => (
+                <div className="results-container">
+                  <span
+                    style={{
+                      color: textColors.find((t) => t.value === player.points)?.color || "grey",
+                      backgroundColor: textColors.find((t) => t.value === player.points)?.fadedColor || "lightgrey",
+                    }}
+                    className="inline-flex items-center justify-center px-4 py-1 mr-2 text-md font-semibold leading-none rounded-full"
+                  >
+                    {player.points !== null ? player.points : "∅"}
+                  </span>
+                  {player.name}
+                </div>
+              ))}
+          </div>
         </div>
         <div className="w-2/3 p-10">
           <PieChart
@@ -63,8 +84,8 @@ const Results = ({ game, roundReset }) => {
             label={({ dataEntry }) => dataEntry.title}
             labelStyle={(index) => ({
               fill: donutData[index].color,
-              fontSize: '8px',
-              fontFamily: 'sans-serif',
+              fontSize: "8px",
+              fontFamily: "sans-serif",
             })}
             labelPosition={60}
             data={donutData}

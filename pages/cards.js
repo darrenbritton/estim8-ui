@@ -5,28 +5,26 @@ const Cards = ({
     return (<div>loading</div>);
   }
 
-  // const cards = [0, 0.125, 0.25, 0.5, 1, 2, 3, 5, 8, 13, 21, '?'];
-  const cards = [0, 0.5, 1, 2, 3, 5, 8, 13, 21, '∞', '?', '☕️'];
+  const cards = [0, 0.5, 1, 2, 3, 5, 13, 20, 40];
 
   const cardText = (val) => {
     switch (val) {
       case 0.125: return (<span>&#8539;</span>);
       case 0.25: return (<span>&#188;</span>);
       case 0.5: return (<span>&#189;</span>);
-      default: return (<span>{val}</span>);
+      default: return val;
     }
   };
 
   const myPoints = game.players.find((p) => p.name === name).points;
   return (
     <div>
-      <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+      <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
         {
           cards.map((card) => {
-            let className = 'rounded-md shadow-md text-7xl py-10 bg-white bg-gradient-to-br hover:text-white hover:from-blue-400 hover:to-blue-600 transition duration-75 ease-in-out';
+            let className = 'poker-card';
             let onClick = () => { playerVote(card); };
             if (myPoints === card) {
-              className = 'rounded-md shadow-md text-7xl py-10 bg-gradient-to-br from-green-400 to-green-600 hover:from-red-400 hover:to-red-800 text-white transition duration-75 ease-in-out';
               onClick = () => { playerVote(null); };
             }
             return (
@@ -36,7 +34,12 @@ const Cards = ({
                 key={card}
                 type="button"
               >
-                {cardText(card)}
+
+                <div className="poker-card-inner">
+                  {cardText(card)}
+                  <div className="poker-card-number-accent left">{cardText(card)}</div>
+                  <div className="poker-card-number-accent right">{cardText(card)}</div>
+                </div>
               </button>
             );
           })

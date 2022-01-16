@@ -1,4 +1,5 @@
 /* eslint-disable */
+import '../public/styles.css';
 import 'tailwindcss/tailwind.css';
 import 'fontsource-montserrat/100.css';
 import 'fontsource-montserrat/200.css';
