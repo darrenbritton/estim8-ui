@@ -108,11 +108,11 @@ const Index = () => {
       <nav className="bg-gray-800">
         <div className="container mx-auto px-4">
           <div className="flex items-center h-20">
-            <Logo height="50" />
-            <div className="text-center text-white montserrat px-4">
+            <Logo height="30" />
+            <div className="text-left mb-2 text-white montserrat px-1">
               <div>
-                <span className="text-5xl font-extralight">estim</span>
-                <span className="text-4xl font-light">8</span>
+                <span className="text-3xl font-extralight">estim</span>
+                <span className="text-2xl font-light">8</span>
               </div>
               <div className="text-gray-200 text-xs tracking-widest font-thin -mt-1">POKER PLANNING</div>
             </div>
