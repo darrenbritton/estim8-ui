@@ -25,7 +25,7 @@ const Cards = ({
             let className = 'poker-card';
             let onClick = () => { playerVote(card); };
             if (myPoints === card) {
-              className+= ' poker-card-selected';
+              className += ' poker-card-selected';
               onClick = () => { playerVote(null); };
             }
             return (
