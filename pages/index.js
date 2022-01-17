@@ -114,7 +114,7 @@ const Index = () => {
                 <span className="text-3xl font-extralight">estim</span>
                 <span className="text-2xl font-light">8</span>
               </div>
-              <div className="text-gray-200 text-xs tracking-widest font-thin -mt-1">POKER PLANNING</div>
+              <div className="text-gray-200 text-xs tracking-widest font-thin -mt-1">PLANNING POKER</div>
             </div>
           </div>
         </div>
