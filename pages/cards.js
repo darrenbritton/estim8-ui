@@ -5,7 +5,7 @@ const Cards = ({
     return (<div>loading</div>);
   }
 
-  const cards = [0, 0.5, 1, 2, 3, 5, 13, 20, 40];
+  const cards = [0, 0.5, 1, 2, 3, 5, 13, 20];
 
   const cardText = (val) => {
     switch (val) {
@@ -18,13 +18,14 @@ const Cards = ({
 
   const myPoints = game.players.find((p) => p.name === name).points;
   return (
-    <div>
-      <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
+    <div className="card-container">
+      <div className="cards">
         {
           cards.map((card) => {
-            const className = 'poker-card';
+            let className = 'poker-card';
             let onClick = () => { playerVote(card); };
             if (myPoints === card) {
+              className+= ' poker-card-selected';
               onClick = () => { playerVote(null); };
             }
             return (

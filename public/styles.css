@@ -1,3 +1,13 @@
+.card-container {
+  margin-top: 110px;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
 .poker-card {
   width: 100px;
   height: 138px;
@@ -15,15 +25,24 @@
   transition: all 0.2s ease-in-out;
 }
 
+.poker-card:focus {
+  outline: none;
+}
+
+@media only screen and (min-width: 1286px) {
+  .poker-card-selected {
+    transform: translate(0, -110px);
+  }
+}
+
 .poker-card:hover {
   border-color: #62a4dc;
   color: #0472d0;
 }
 
-.poker-card:focus {
+.poker-card-selected {
   border-color: #70c793;
   color: #69b77a;
-  outline: none;
 }
 
 .poker-card-inner {
@@ -50,7 +69,7 @@
   background-color: #e0eef9;
 }
 
-.poker-card:focus .poker-card-inner {
+.poker-card-selected .poker-card-inner {
   background-color: #e0f9e3;
 }
 
@@ -72,7 +91,7 @@
   color: #68a1d4;
 }
 
-.poker-card:focus .poker-card-number-accent {
+.poker-card-selected .poker-card-number-accent {
   color: #68d491;
 }
 
@@ -137,4 +156,10 @@
   .results {
     margin-bottom: 10px;
   }
+}
+
+.results-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }

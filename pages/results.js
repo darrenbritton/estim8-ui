@@ -23,8 +23,7 @@ const Results = ({ game, roundReset }) => {
   //   { name: "d", points: 3 },
   //   { name: "e", points: 5 },
   //   { name: "f", points: 13 },
-  //   { name: "g", points: 20 },
-  //   { name: "h", points: 40 },
+  //   { name: "g", points: 20 }
   // ];
   const textColors = [];
   const scores = game.players.map((p) => p.points);
@@ -62,8 +61,8 @@ const Results = ({ game, roundReset }) => {
     });
   return (
     <div>
-      <div className="flex space-x-4">
-        <div className="w-1/3 align-middle">
+      <div className="results-container">
+        <div className="align-middle">
           <div className="flex stats">
             <div className="stats-container">
               <div className="stats-result">{totalVotes}</div>
@@ -105,21 +104,19 @@ const Results = ({ game, roundReset }) => {
               ))}
           </div>
         </div>
-        <div className="w-2/3 p-10">
-          <PieChart
-            className="w-80 mx-auto"
-            lineWidth={20}
-            label={({ dataEntry }) => dataEntry.title}
-            labelStyle={(index) => ({
-              fill: donutData[index].color,
-              fontSize: '8px',
-              fontFamily: 'sans-serif',
-            })}
-            labelPosition={60}
-            data={donutData}
-            startAngle={270}
-          />
-        </div>
+        <PieChart
+          className="w-80 mx-auto"
+          lineWidth={20}
+          label={({ dataEntry }) => dataEntry.title}
+          labelStyle={(index) => ({
+            fill: donutData[index].color,
+            fontSize: '8px',
+            fontFamily: 'sans-serif',
+          })}
+          labelPosition={60}
+          data={donutData}
+          startAngle={270}
+        />
       </div>
       <div className="text-right mt-5">
         <button
