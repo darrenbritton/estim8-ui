@@ -5,7 +5,7 @@ const Cards = ({
     return (<div>loading</div>);
   }
 
-  const cards = [0, 0.5, 1, 2, 3, 5, 13, 20];
+  const cards = ['?', 0.5, 1, 2, 3, 5, 13, 20];
 
   const cardText = (val) => {
     switch (val) {

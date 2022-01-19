@@ -1,5 +1,6 @@
-import { PieChart } from 'react-minimal-pie-chart';
-import Color from 'color';
+import { PieChart } from "react-minimal-pie-chart";
+import Confetti from "react-confetti";
+import Color from "color";
 
 const Results = ({ game, roundReset }) => {
   if (!game) {
@@ -7,14 +8,14 @@ const Results = ({ game, roundReset }) => {
   }
 
   const colors = [
-    '533a71',
-    '6184d8',
-    '50c5b7',
-    'f9b3d1',
-    '065143',
-    'ffbf00',
-    'ff4242',
-    '33658A',
+    "533a71",
+    "6184d8",
+    "50c5b7",
+    "f9b3d1",
+    "065143",
+    "ffbf00",
+    "ff4242",
+    "33658A",
   ];
   // game.players = [
   //   { name: "a", points: 0 },
@@ -27,12 +28,13 @@ const Results = ({ game, roundReset }) => {
   // ];
   const textColors = [];
   const scores = game.players.map((p) => p.points);
-  const totalVotes = game.players.length;
+  const totalVotes = scores.filter(s => s !== null).length;
   const average = (scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(
-    2,
+    2
   );
   const lowest = Math.min(...scores);
   const highest = Math.max(...scores);
+  const allSame = scores.every((v) => v === scores[0] || v === null);
   const results = game.players
     .filter((player) => player.points !== null)
     .reduce((acc, player) => {
@@ -66,7 +68,7 @@ const Results = ({ game, roundReset }) => {
           <div className="flex stats">
             <div className="stats-container">
               <div className="stats-result">{totalVotes}</div>
-              <div className="stats-title">Total</div>
+              <div className="stats-title">Votes</div>
             </div>
             <div className="stats-container">
               <div className="stats-result">{average}</div>
@@ -90,28 +92,33 @@ const Results = ({ game, roundReset }) => {
                     style={{
                       color:
                         textColors.find((t) => t.value === player.points)
-                          ?.color || 'grey',
+                          ?.color || "grey",
                       backgroundColor:
                         textColors.find((t) => t.value === player.points)
-                          ?.fadedColor || 'lightgrey',
+                          ?.fadedColor || "lightgrey",
                     }}
                     className="inline-flex items-center justify-center px-4 py-1 mr-2 text-md font-semibold leading-none rounded-full"
                   >
-                    {player.points !== null ? player.points : '∅'}
+                    {player.points !== null ? player.points : "∅"}
                   </span>
                   {player.name}
                 </div>
               ))}
           </div>
         </div>
+        <Confetti
+          numberOfPieces={400}
+          recycle={false}
+          run={allSame}
+        />
         <PieChart
           className="w-80 mx-auto"
           lineWidth={20}
           label={({ dataEntry }) => dataEntry.title}
           labelStyle={(index) => ({
             fill: donutData[index].color,
-            fontSize: '8px',
-            fontFamily: 'sans-serif',
+            fontSize: "8px",
+            fontFamily: "sans-serif",
           })}
           labelPosition={60}
           data={donutData}
