@@ -1,6 +1,6 @@
 const Login = ({ playerAdd, setName }) => (
   <div className="text-center">
-    <p className="text-2xl">Enter your name</p>
+    <p className="text-2xl font-light">Enter your name</p>
     <div className="py-5">
       <input onInput={(e) => setName(e.target.value.trim())} onKeyPress={(e) => e.key === 'Enter' && playerAdd()} className="rounded-md shadow-md border-gray-50 border-2 py-2 px-4 mx-2" autoComplete="false" />
       <button
