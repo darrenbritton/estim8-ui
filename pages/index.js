@@ -13,7 +13,7 @@ const Index = () => {
 
   useEffect(() => {
     if (!ws) {
-      setWs(new WebSocket('ws://darrenbritton-home.duckdns.org:8081'));
+      setWs(new WebSocket('wss://poker-server.home.darrenbritton.com'));
     }
   }, []);
 
