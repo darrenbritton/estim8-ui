@@ -12,7 +12,7 @@ const Index = () => {
   const [name, setName] = useState('');
 
   useEffect(() => {
-    if (!ws) {
+    if (!ws || ws.readyState !== ws.OPEN) {
       setWs(new WebSocket('wss://poker-server.home.darrenbritton.com'));
     }
   }, []);
