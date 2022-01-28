@@ -12,7 +12,7 @@ const Index = () => {
   const [name, setName] = useState('');
 
   useEffect(() => {
-    if (!ws) {
+    if (!ws || ws.readyState !== ws.OPEN) {
       setWs(new WebSocket('ws://darrenbritton-home.duckdns.org:8081'));
     }
   }, []);
