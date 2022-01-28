@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import useWebSocket, { ReadyState } from 'react-use-websocket';
 import Head from 'next/head';
 import Cards from './cards';
 import Logo from './logo';
@@ -7,31 +8,34 @@ import Players from './players';
 import Results from './results';
 
 const Index = () => {
-  const [ws, setWs] = useState(null);
+  const [socketUrl] = useState('wss://poker-server.home.darrenbritton.com');
   const [game, setGame] = useState(null);
   const [name, setName] = useState('');
 
-  useEffect(() => {
-    if (!ws || ws.readyState !== ws.OPEN) {
-      setWs(new WebSocket('wss://poker-server.home.darrenbritton.com'));
-    }
-  }, []);
+  const {
+    sendMessage,
+    lastMessage,
+    readyState,
+  } = useWebSocket(socketUrl, {
+    onOpen: () => console.log('websocket opened'),
+    onClose: () => console.log('websocket closed'),
+    onError: (err) => console.log('websocket error', err),
+    shouldReconnect: () => true,
+  });
 
   useEffect(() => {
-    if (ws) {
-      ws.onmessage = (e) => {
-        setGame(JSON.parse(e.data));
-      };
+    if (lastMessage !== null) {
+      setGame(JSON.parse(lastMessage.data));
     }
-  }, [ws]);
+  }, [lastMessage]);
 
-  const sendMessage = (data) => {
-    ws.send(JSON.stringify(data));
+  const sendJsonMessage = (data) => {
+    sendMessage(JSON.stringify(data));
   };
 
   const playerAdd = () => {
     if (name !== '') {
-      sendMessage({
+      sendJsonMessage({
         type: 'PLAYER_ADD',
         name,
       });
@@ -39,7 +43,7 @@ const Index = () => {
   };
 
   const playerVote = (p) => {
-    sendMessage({
+    sendJsonMessage({
       type: 'PLAYER_VOTE',
       name,
       points: p,
@@ -47,26 +51,26 @@ const Index = () => {
   };
 
   const roundReset = () => {
-    sendMessage({
+    sendJsonMessage({
       type: 'ROUND_RESET',
     });
   };
 
   const roundEndVote = () => {
-    sendMessage({
+    sendJsonMessage({
       type: 'ROUND_END_VOTE',
     });
   };
 
   const gameNew = () => {
     if (window.confirm('Do you really want to kick everyone from the game?')) {
-      sendMessage({
+      sendJsonMessage({
         type: 'GAME_NEW',
       });
     }
   };
 
-  if (!game) {
+  if (!game || readyState !== ReadyState.OPEN) {
     return (<div>loading...</div>);
   }
 
