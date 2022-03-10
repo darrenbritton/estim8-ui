@@ -8,7 +8,7 @@ import Players from './players';
 import Results from './results';
 
 const Index = () => {
-  const [socketUrl] = useState('wss://estim8-server-q6jwfgm5hq-uc.a.run.app');
+  const [socketUrl] = useState('wss://estim8-server.darrenbritton.com');
   const [game, setGame] = useState(null);
   const [name, setName] = useState('');
 
