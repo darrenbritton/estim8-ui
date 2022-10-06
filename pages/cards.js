@@ -5,8 +5,8 @@ const Cards = ({
     return (<div>loading</div>);
   }
 
-  const cards = ['?', 0.5, 1, 2, 3, 5, 13, 20];
-
+  const cards = [1, 2, 3, 5, 8, 13, 21, 34];
+  
   const cardText = (val) => {
     switch (val) {
       case 0.125: return (<span>&#8539;</span>);
