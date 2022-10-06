@@ -135,18 +135,7 @@ const Index = () => {
         </div>
       </div>
       <div className="text-center text-xs p-2">
-        Made by
-        {' '}
-        <a href="https://github.com/fabrice404" target="_blank" rel="noreferrer" className="text-pink-400">Fabrice Lamant</a>
-        {' '}
-        with
-        {' '}
-        <a href="https://nextjs.org/" target="_blank" rel="noreferrer" className="text-yellow-400">Next.js</a>
-        {' '}
-        and
-        {' '}
-        <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer" className="text-blue-400">Tailwind CSS</a>
-        {' | '}
+        <a href="https://www.jeremiahlee.com/posts/agile/user-story-estimation/" target="_blank" rel="noreferrer" className="text-pink-400">User Story Estimation Guide</a>
         <button onClick={() => { gameNew(); }} type="button">reset game</button>
       </div>
     </div>
